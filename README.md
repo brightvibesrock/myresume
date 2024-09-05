@@ -1,8 +1,6 @@
 # Print-to-PDF HTML Resume Template
 
-> A Stand-Out, easy-to-edit, classy resume template that's perfect for your website, blog, and job-application PDF uploads.
-
-[![](/examples/john-doe-resume-preview.png)](/examples/john-doe-resume.png)
+> Check out my resume!
 
 ## Features
 
@@ -11,12 +9,6 @@
 - [x] Print-to-PDF
 - [x] Renders properly in "Evergreen" browsers since 2016
 - [x] Copy, Paste, Customize
-
-## Examples
-
-- [AJ ONeal (html)](https://coolaj86.com/resume/)
-- [John Shaver (html)](https://jshaver.net/resume/)
-- [Min-Zhong "John" Lu (pdf)](https://mnjul.net/cv/resume.pdf)
 
 ## Make Your Own
 
@@ -43,27 +35,8 @@ git clone ssh://git@github.com/BeyondCodeBootcamp/html-resume.git
 pushd html-resume/
 git submodule init
 git submodule update --recursive --depth=1
-```
 
-I show the other example above because it's just one line, but you won't be able to `git commit` and `git push` changes.
-
-# Tips
-
-- Printable as US Letter in Portrait mode
-  - (PR for A4 support welcome)
-- Brave, Google Chrome, and Edge
-  - Set **Margin** to **None**
-  - Print **Background Graphics**
-  - Don't print headers and footers
-  - Save as PDF
-- Firefox:
-  - You may eed to remove page margins in **about:config**
-  - Uncheck **Ignore Scaling and Shrink To Fit Page Width**
-  - Check **Print Background Colors**
-  - Clear out the headers and footers
-  - Save as PDF
-
-# Acknowledgements
+## Acknowledgements
 
 - [Inspired](https://blogs.purincess.tw/matrixblog/2016/04/typesetting-resume-with-html-and-css/) [by](https://github.com/mnjul/html-resume) Paolo Zupin and [Shih-Wen "Angela" Chen](https://angelachen.design/2014/resume.pdf)
 - Created as a Print-to-PDF HTML document by [Min-Zhong "John" Lu](https://mnjul.net/cv/resume.pdf)
