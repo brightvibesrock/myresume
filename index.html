@@ -268,22 +268,53 @@
           </a>
         </li>
 
-  <!-- Load CryptoJS (must be included BEFORE your script runs) -->
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+        <li>
+          <span id="email-link"></span>
 
-          <!-- Load CryptoJS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+          <script>
+            const encrypted = "a+ksQncu9pHnqC/3rAIbYI1dtcZLLbwtYp+/Vh/eE3RZPvrwgTLN3CvLbA==";
+            const ivString = "jMFhA7R3yca3cDa0";
+            const keyString = "secret123";
 
-          <li>
-            <i class="fa fa-globe"></i>
-            <span id="email-link"></span>
+            async function decryptEmail() {
+              const enc = new TextEncoder();
+              const dec = new TextDecoder();
 
-            <script>
-              const encrypted = "REPLACE_WITH_YOUR_ENCRYPTED_STRING";
-              const key = "secret123";
+              function b64ToBytes(b64) {
+                return Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+              }
 
-              const bytes = CryptoJS.AES.decrypt(encrypted, key);
-              const email = bytes.toString(CryptoJS.enc.Utf8);
+              const keyMaterial = await crypto.subtle.importKey(
+                "raw",
+                enc.encode(keyString),
+                { name: "PBKDF2" },
+                false,
+                ["deriveKey"]
+              );
+
+              const key = await crypto.subtle.deriveKey(
+                {
+                  name: "PBKDF2",
+                  salt: enc.encode("email-salt"),
+                  iterations: 100000,
+                  hash: "SHA-256"
+                },
+                keyMaterial,
+                { name: "AES-GCM", length: 256 },
+                false,
+                ["decrypt"]
+              );
+
+              const decrypted = await crypto.subtle.decrypt(
+                {
+                  name: "AES-GCM",
+                  iv: b64ToBytes(ivString)
+                },
+                key,
+                b64ToBytes(encrypted)
+              );
+
+              const email = dec.decode(decrypted);
 
               const link = document.createElement("a");
               link.href = "mailto:" + email;
@@ -291,15 +322,11 @@
                 '<img src="https://img.shields.io/badge/Email-gray?style=flat&logo=gmail&logoColor=white" alt="Email">';
 
               document.getElementById("email-link").appendChild(link);
-            </script>
-          </li>
+            }
 
-
-          
-
-          
-
-
+            decryptEmail();
+          </script>
+        </li>
 
 
 <!--           <li><i class="fa fa-globe"></i><a href="https://github.com/brightvibesrock/brightvibes/"><img src="https://img.shields.io/badge/-github-gray?style=flat&amp;logo=github&amp;logoColor=white" alt="github"></a></li>
